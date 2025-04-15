@@ -7,6 +7,13 @@ function Book(title, author, pageLength, readStatus, cover){
     this.readStatus = readStatus;
     this.cover = cover;
     this.id = crypto.randomUUID();
+    this.changeStatus = function(){
+        if (this.readStatus !== "read"){
+            this.readStatus = "read";
+        } else {
+            this.readStatus = "not read yet";
+        }
+    }
 };
 
 function addBookToLibrary(title, author, pageLength, readStatus, cover){
@@ -20,9 +27,49 @@ addBookToLibrary("Wolfsong", "T.J. Klune", 528, "read", "https://images-na.ssl-i
 addBookToLibrary("Ravensong", "T.J. Klune", 512, "not read yet", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686579139i/62039416.jpg");
 
 /*********DOM  MANIPULATION  FUNCTIONS *********/
-    //Create a function displayBooks()
-        //Iterate through the library array
-        //Each book will have its own .card
-            //Create new elements
-                //1. div with class .card
-                //2.
+//Declare variables for container elements
+
+function displayBooks(){
+    for (let book of myLibrary){
+            const bookDiv = document.createElement("div")
+            bookDiv.classList.add("card");
+            bookDiv.id = book.id;
+            bookDiv.innerHTML = `
+            <img src="${book.cover}" alt="${book.title} cover">
+            <div>
+                <h3>${book.title}</h3>
+                <p class="author">${book.author}</p>
+                <p class="pages">${book.pageLength} pages</p>
+            </div>
+            `
+            const bookStatus = document.createElement("p");
+            bookStatus.classList.add("status");
+            bookStatus.innerText = book.readStatus;
+
+            const changeBtn = document.createElement("button");
+            changeBtn.classList.add("change-status");
+            changeBtn.innerText = "Change status";
+            changeBtn.onclick = () => {
+                book.changeStatus();
+                bookStatus.innerText = book.readStatus;
+            }
+
+            const removeBtn = document.createElement("button");
+            removeBtn.classList.add("remove-book");
+            removeBtn.innerText = "X";
+            removeBtn.onclick = () => {
+                document.getElementById(book.id).remove();
+            }
+
+        bookDiv.appendChild(bookStatus);
+        bookDiv.appendChild(changeBtn);
+        bookDiv.appendChild(removeBtn);
+        document.body.appendChild(bookDiv);
+    }
+
+
+}
+
+
+//When the window is loaded, call the displayBooks function
+window.addEventListener("load", displayBooks);
