@@ -28,7 +28,7 @@ addBookToLibrary("Ravensong", "T.J. Klune", 512, "not read yet", "https://images
 
 /*********DOM  MANIPULATION  FUNCTIONS *********/
 //Declare variables for container elements
-
+const libDiv = document.querySelector("#library");
 function displayBooks(){
     for (let book of myLibrary){
             const bookDiv = document.createElement("div")
@@ -56,15 +56,16 @@ function displayBooks(){
 
             const removeBtn = document.createElement("button");
             removeBtn.classList.add("remove-book");
-            removeBtn.innerText = "X";
+            removeBtn.innerText = "Remove";
             removeBtn.onclick = () => {
                 document.getElementById(book.id).remove();
             }
 
-        bookDiv.appendChild(bookStatus);
+
+        bookDiv.lastElementChild.appendChild(bookStatus);
         bookDiv.appendChild(changeBtn);
         bookDiv.appendChild(removeBtn);
-        document.body.appendChild(bookDiv);
+        libDiv.appendChild(bookDiv);
     }
 
 

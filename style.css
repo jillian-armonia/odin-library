@@ -1,0 +1,77 @@
+body{
+    background-color: darkolivegreen;
+    font-family: "Sono", monospace;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1{
+    text-align: center;
+    font-family: "Barrio", monospace;
+    font-size: 4rem;
+    background-color: goldenrod;
+    width: 50%;
+    border-radius: 5px;
+    padding: 5px;
+    text-shadow: whitesmoke 2px 2px 5px;
+    box-shadow: rgb(53, 66, 30) 3px 3px 5px;
+}
+
+#library{
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgb(100, 57, 37);
+    border: solid 1rem sienna;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card{
+    width: 100%;
+    display: grid;
+}
+
+.card img{
+    max-width: 250px;
+    max-height: 350px;
+    justify-self: center;
+    margin: 25px 5px 0;
+    box-shadow: rgb(61, 35, 24) 5px 0 5px;
+}
+
+.card > div{
+    background-color: sienna;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.card > div h3{
+    background-color: rgb(216, 171, 24);
+    border: inset 5px rgb(175, 139, 21);
+}
+
+.card > div h3, p{
+    width: 70%;
+    justify-self: center;
+}
+
+.card > div p{
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 5px;
+    font-family: "Pompiere";
+}
+
+.change-status{
+    background-color: rgb(98, 153, 255);
+}
+
+.remove-book{
+    background-color: rgb(255, 107, 107);
+}
+
+.change-status, .remove-book{
+    border-radius: 5px;
+    cursor: pointer;
+}
