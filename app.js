@@ -26,16 +26,50 @@ addBookToLibrary("Circe", "Madeline Miller", 363, "read", "https://images-na.ssl
 addBookToLibrary("Wolfsong", "T.J. Klune", 528, "read", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686575943i/62039417.jpg");
 addBookToLibrary("Ravensong", "T.J. Klune", 512, "not read yet", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686579139i/62039416.jpg");
 
-/*********DOM  MANIPULATION  FUNCTIONS *********/
-//Declare variables for container elements
-const libDiv = document.querySelector("#library");
-const showForm = document.createElement("button");
-showForm.id = "show-form"
-showForm.innerText = "+";
 
+/********VARIABLES FOR DOM ELEMENTS************/
+const libDiv = document.querySelector("#library");
+const showFormBtn = document.createElement("button");
+showFormBtn.id = "show-form"
+showFormBtn.innerText = "+";
+showFormBtn.onclick = () => {
+    document.querySelector("dialog").showModal();
+}
+const addTitle = document.querySelector("#add-title");
+const addAuthor = document.querySelector("#add-author");
+const addPages = document.querySelector("#add-pages");
+const addReadStatus = document.querySelector("#read-status");
+const addCover = document.querySelector("#img-src");
+const addBookBtn = document.querySelector("#add-book");
+
+/*********DOM  MANIPULATION  FUNCTIONS *********/
 function displayBooks(){
     for (let book of myLibrary){
-            const bookDiv = document.createElement("div")
+        setBook(book);
+    }
+
+    libDiv.appendChild(showFormBtn)
+}
+
+
+//When the window is loaded, call the displayBooks function
+window.addEventListener("load", displayBooks);
+
+//Create getNewBook function
+function getNewBook(){
+    if (!addCover.value){
+        addCover.value = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fpicture-sharing-sites%2F32%2FNo_Image-512.png&f=1&nofb=1&ipt=65ac1b9a0bf6c9a42e401056bd157f933d82d2d58906faf4a4206c1909286c07";
+    }
+    const newBook = new Book(addTitle.value, addAuthor.value, addPages.value, addReadStatus.value, addCover.value);
+    myLibrary.push(newBook);
+    showFormBtn.remove();
+    setBook(newBook);
+    libDiv.appendChild(showFormBtn);
+    clearForm();
+}
+
+function setBook(book){
+    const bookDiv = document.createElement("div")
             bookDiv.classList.add("card");
             bookDiv.id = book.id;
             bookDiv.innerHTML = `
@@ -70,13 +104,26 @@ function displayBooks(){
         bookDiv.appendChild(changeBtn);
         bookDiv.appendChild(removeBtn);
         libDiv.appendChild(bookDiv);
-    }
-
-    libDiv.appendChild(showForm)
-
 }
 
+//Create clearForm function
+function clearForm(){
+    addTitle.value = "";
+    addAuthor.value = "";
+    addPages.value = "";
+    addReadStatus.value = "not read yet";
+    addCover.value = "";
+    addBookBtn.disabled = true;
+    document.querySelector("dialog").close();
+}
 
-//When the window is loaded, call the displayBooks function
-window.addEventListener("load", displayBooks);
-
+//Add an eventListener for the addBookBtn
+addBookBtn.addEventListener("click", getNewBook);
+document.querySelector("#cancel").addEventListener("click", () => {
+    clearForm();
+})
+document.body.addEventListener("change", (e) => {
+    if (addAuthor.value && addTitle.value && addPages.value){
+        addBookBtn.disabled = false;
+    }
+})
