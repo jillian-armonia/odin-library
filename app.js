@@ -29,6 +29,10 @@ addBookToLibrary("Ravensong", "T.J. Klune", 512, "not read yet", "https://images
 /*********DOM  MANIPULATION  FUNCTIONS *********/
 //Declare variables for container elements
 const libDiv = document.querySelector("#library");
+const showForm = document.createElement("button");
+showForm.id = "show-form"
+showForm.innerText = "+";
+
 function displayBooks(){
     for (let book of myLibrary){
             const bookDiv = document.createElement("div")
@@ -68,9 +72,11 @@ function displayBooks(){
         libDiv.appendChild(bookDiv);
     }
 
+    libDiv.appendChild(showForm)
 
 }
 
 
 //When the window is loaded, call the displayBooks function
 window.addEventListener("load", displayBooks);
+

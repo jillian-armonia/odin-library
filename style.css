@@ -75,3 +75,12 @@ h1{
     border-radius: 5px;
     cursor: pointer;
 }
+
+#show-form{
+    width: 70%;
+    height: 70%;
+    font-size: 6rem;
+    justify-self: center;
+    align-self: center;
+    cursor: pointer;
+}
