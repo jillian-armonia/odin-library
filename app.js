@@ -1,31 +1,25 @@
-const myLibrary = [];
+class Book{
+    static myLibrary = [];
 
-function Book(title, author, pageLength, readStatus, cover){
-    this.title = title;
-    this.author = author;
-    this.pageLength = pageLength;
-    this.readStatus = readStatus;
-    this.cover = cover;
-    this.id = crypto.randomUUID();
-    this.changeStatus = function(){
-        if (this.readStatus !== "read"){
-            this.readStatus = "read";
-        } else {
-            this.readStatus = "not read yet";
-        }
+    constructor(title, author, pageLength, readStatus, cover){
+        this.title = title;
+        this.author = author;
+        this.pageLength = pageLength;
+        this.readStatus = readStatus;
+        this.cover = cover;
+        this.id = crypto.randomUUID();
+        Book.myLibrary.push(this);
     }
-};
 
-function addBookToLibrary(title, author, pageLength, readStatus, cover){
-    let newBook = new Book(title, author, pageLength, readStatus, cover);
-    myLibrary.push(newBook);
+    changeStatus(){
+        this.readStatus !== "read" ? this.readStatus = "read" : this.readStatus = "not read yet";
+    }
 }
 
-addBookToLibrary("The Song of Achilles", "Madeline Miller", 416, "read", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1357177533i/13623848.jpg");
-addBookToLibrary("Circe", "Madeline Miller", 363, "read", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1565909496i/35959740.jpg");
-addBookToLibrary("Wolfsong", "T.J. Klune", 528, "read", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686575943i/62039417.jpg");
-addBookToLibrary("Ravensong", "T.J. Klune", 512, "not read yet", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686579139i/62039416.jpg");
-
+new Book("The Song of Achilles", "Madeline Miller", 416, "read", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1357177533i/13623848.jpg");
+new Book("Circe", "Madeline Miller", 363, "read", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1565909496i/35959740.jpg");
+new Book("Wolfsong", "T.J. Klune", 528, "read", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686575943i/62039417.jpg");
+new Book("Ravensong", "T.J. Klune", 512, "not read yet", "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1686579139i/62039416.jpg");
 
 /********VARIABLES FOR DOM ELEMENTS************/
 const libDiv = document.querySelector("#library");
