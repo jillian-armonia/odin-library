@@ -38,7 +38,7 @@ const addBookBtn = document.querySelector("#add-book");
 
 /*********DOM  MANIPULATION  FUNCTIONS *********/
 function displayBooks(){
-    for (let book of myLibrary){
+    for (let book of Book.myLibrary){
         setBook(book);
     }
 
@@ -51,11 +51,10 @@ window.addEventListener("load", displayBooks);
 
 //Create getNewBook function
 function getNewBook(){
-    if (!addCover.value){
+    if (!addCover.value){ //Put a placeholder image
         addCover.value = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fpicture-sharing-sites%2F32%2FNo_Image-512.png&f=1&nofb=1&ipt=65ac1b9a0bf6c9a42e401056bd157f933d82d2d58906faf4a4206c1909286c07";
     }
     const newBook = new Book(addTitle.value, addAuthor.value, addPages.value, addReadStatus.value, addCover.value);
-    myLibrary.push(newBook);
     showFormBtn.remove();
     setBook(newBook);
     libDiv.appendChild(showFormBtn);
